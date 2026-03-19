@@ -9,21 +9,20 @@ MY_PASSWORD = os.environ.get("MY_PASSWORD")
 
 now = dt.datetime.now()
 weekday = now.weekday()
-if weekday == 0:
-    with open("quotes.txt", "r", encoding="utf-8") as quote_file:
-        all_quotes = quote_file.readlines()
-        random_quote = random.choice(all_quotes).strip()
-    with open("contacts.csv", "r", encoding="utf-8") as contacts_file:
-        reader = csv.DictReader(contacts_file)
-        with smtplib.SMTP("smtp.gmail.com", 587) as connection:
-            connection.starttls()
-            connection.login(user=MY_EMAIL, password=MY_PASSWORD)
-            for row in reader:
-                name = row["name"]
-                email = row["email"]
+with open("quotes.txt", "r", encoding="utf-8") as quote_file:
+    all_quotes = quote_file.readlines()
+    random_quote = random.choice(all_quotes).strip()
+with open("contacts.csv", "r", encoding="utf-8") as contacts_file:
+    reader = csv.DictReader(contacts_file)
+    with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+        connection.starttls()
+        connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+        for row in reader:
+            name = row["name"]
+            email = row["email"]
 
-                message = f"""Subject:Psst
-
+            message = f"""Subject:Psst
+            
 Dear {name},
 
 Happy Monday! During the long grind here is a word of encouragement!
@@ -34,8 +33,8 @@ Sincerely,
 Justin
 """
 
-                connection.sendmail(
-                    from_addr=MY_EMAIL,
-                    to_addrs=email,
-                    msg=message
+            connection.sendmail(
+                from_addr=MY_EMAIL,
+                to_addrs=email,
+                msg=message
                 )
