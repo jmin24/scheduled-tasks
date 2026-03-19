@@ -9,6 +9,7 @@ MY_PASSWORD = os.environ.get("MY_PASSWORD")
 
 now = dt.datetime.now()
 weekday = now.weekday()
+day_name = now.strftime("%A")
 with open("quotes.txt", "r", encoding="utf-8") as quote_file:
     all_quotes = quote_file.readlines()
     random_quote = random.choice(all_quotes).strip()
@@ -25,7 +26,7 @@ with open("contacts.csv", "r", encoding="utf-8") as contacts_file:
             
 Dear {name},
 
-Happy Monday! During the long grind here is a word of encouragement!
+Happy {day_name}! During the long grind here is a word of encouragement!
 
 {random_quote}
 
