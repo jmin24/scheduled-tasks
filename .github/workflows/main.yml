@@ -1,0 +1,20 @@
+name: daily-motivational-quote
+
+on:
+  schedule:
+    - cron: "5 18 * * *"  # runs every day at 10:05AM PST
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Run script
+        env:
+          MY_EMAIL: ${{ secrets.MY_EMAIL }}
+          MY_PASSWORD: ${{ secrets.MY_PASSWORD }}
+        run: python main.py
