@@ -2,7 +2,8 @@ name: daily-motivational-quote
 
 on:
   schedule:
-    - cron: "10 18 * * *"  # runs every day at 10:05AM PST
+    - cron: "23 18 * * *"  # runs every day at 10:23AM PST
+  workflow_dispatch:
 
 jobs:
   run-script:
